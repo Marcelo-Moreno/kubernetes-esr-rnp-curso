@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-esr2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-esr2
+  template:
+    metadata:
+      labels:
+        app: app-esr2
+    spec:
+      containers:
+        - name: app-esr2
+          image: marcelomoreno/app-esr2:v1
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_MESSAGE
+              value: "Olá da Tarefa 3!"
+          # Adicione limites de recursos (opcional, mas altamente recomendado!)
+          resources:
+            limits:
+              memory: "256Mi" # Limite máximo de memória para o contêiner
+              cpu: "500m"    # Limite máximo de CPU (500m = 0.5 core de CPU)
+            requests:
+              memory: "128Mi" # Requisição mínima de memória
+              cpu: "250m"    # Requisição mínima de CPU
