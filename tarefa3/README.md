@@ -1,6 +1,6 @@
-# 📦 Tarefa 3 – Curso de Kubernetes (ESR/RNP)
+# Tarefa 3 – Curso Orquestração de Contêineres com Kubernetes (ESR/RNP)
 
-## 🎯 Objetivo
+## 🎯 Escopo da Tarefa
 
 Executar os seguintes passos para testar a resiliência do Kubernetes em um cluster com 3 nós:
 
