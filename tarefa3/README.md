@@ -1,40 +1,46 @@
-# Tarefa 2 – Curso Orquestração de Contêineres com Kubernetes (ESR/RNP)
+# 📦 Tarefa 3 – Curso de Kubernetes (ESR/RNP)
 
-[](https://github.com/Marcelo-Moreno/tarefa2-esr-k8s/blob/main/README.md#tarefa-2--curso-orquestra%C3%A7%C3%A3o-de-cont%C3%AAineres-com-kubernetes-esrrnp)
+## 🎯 Objetivo
 
-Este repositório contém os arquivos e configurações utilizados na Tarefa 2 do curso **"Orquestração de Contêineres com Kubernetes"** da **Escola Superior de Redes - RNP**.
+Executar os seguintes passos para testar a resiliência do Kubernetes em um cluster com 3 nós:
 
----
-
-## ✅ Escopo da Tarefa
-
-[](https://github.com/Marcelo-Moreno/tarefa2-esr-k8s/blob/main/README.md#-escopo-da-tarefa)
-
-- [x]  Provisione um cluster Kubernetes com pelo menos 3 nós utilizando **Kind**
-- [x]  Crie uma imagem de uma aplicação simples e publiquei no **Docker Hub**
-- [x]  Configure um **Deployment** com 4 réplicas da aplicação no cluster
-- [x]  Registre todos os passos com printscreens e organizei o relatório final
+1. Fazer o deploy de uma aplicação web dentro do cluster
+2. Identificar em qual node a aplicação foi alocada
+3. Simular a queda desse node
+4. Observar o comportamento da aplicação e para qual node ela foi realocada
+5. Restabelecer o node caído
 
 ---
 
-## 📦 Aplicação
+## 🛠️ Aplicação
 
-[](https://github.com/Marcelo-Moreno/tarefa2-esr-k8s/blob/main/README.md#-aplica%C3%A7%C3%A3o)
+A aplicação foi desenvolvida em **Python com Flask** e exibe informações úteis como:
 
-A aplicação é um pequeno servidor em Python com Flask que responde "Olá, ESR da RNP!" na raiz (`/`).
+- Mensagem personalizada via variável de ambiente
+- Nome do host e IP do pod
+- IP do cliente (usuário)
+- Versão do Flask
 
-### Código-fonte: `app.py`
+### Arquivos principais:
 
-[](https://github.com/Marcelo-Moreno/tarefa2-esr-k8s/blob/main/README.md#c%C3%B3digo-fonte-apppy)
+- `app.py`: aplicação web
+- `Dockerfile`: imagem container da aplicação
+- `requirements.txt`: dependências Python
+- `deployment.yaml`: manifesto do Kubernetes para o deploy
+- `service.yaml`: expõe a aplicação via NodePort
 
-```python
-from flask import Flask
-app = Flask(__name__)
+---
 
-@app.route('/')
-def hello():
-    return "Olá, ESR da RNP!"
+## 🐳 Imagem Docker
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-```
+A imagem foi publicada no Docker Hub:
+
+📦 [`marcelomoreno/app-esr2:v1`](https://hub.docker.com/r/marcelomoreno/app-esr2)
+
+---
+
+## 🚀 Deploy da aplicação no cluster Kind
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
