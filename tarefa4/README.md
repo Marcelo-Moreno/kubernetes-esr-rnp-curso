@@ -21,7 +21,6 @@ Criar um cluster Kubernetes com o Kind, representando dois nodepools:
 - `kind-config-tarefa4.yaml`: Configuração do cluster Kind
 - `nginx-deployment.yaml`: Deployment do nginx (sem toleration)
 - `apache-deploy.yaml`: Deployment do apache (com toleration)
-- `evidencias/`: Prints e capturas de tela da execução (para o PDF final)
 
 ## 🧪 Verificações
 
