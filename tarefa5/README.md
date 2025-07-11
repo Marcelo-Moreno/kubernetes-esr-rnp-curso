@@ -1,4 +1,4 @@
-# Atividade 05 - Curso Kubernetes - ESR
+# Tarefa 5 - Curso Kubernetes - ESR
 
 ## Objetivo
 
