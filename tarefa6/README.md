@@ -1,4 +1,4 @@
-# Tarefa 6 - Curso Kubernetes ESR (RNP)
+# Tarefa 6 - Curso Kubernetes (ESR/RNP)
 
 ## Objetivo
 Criar e expor um registro Docker privado dentro do cluster Kubernetes, acessível via serviço interno.
