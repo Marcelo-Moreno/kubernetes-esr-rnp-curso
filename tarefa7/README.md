@@ -1,4 +1,4 @@
-# Sessão 7 – Armazenamento no Kubernetes (Curso ESR/RNP)
+# Tarefa 7 - Curso Kubernetes (ESR/RNP)
 
 ## Objetivo
 
