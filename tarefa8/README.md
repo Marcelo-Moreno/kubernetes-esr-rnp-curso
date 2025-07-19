@@ -1,4 +1,4 @@
-# Tarefa 8 - Curso Kubernetes ESR/RNP
+# Tarefa 8 - Curso Kubernetes (ESR/RNP)
 
 ## Objetivo
 
