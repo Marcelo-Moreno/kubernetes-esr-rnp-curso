@@ -1,7 +1,4 @@
-Tarefa 9 — Resolução de Problemas e Monitoramento no Kubernetes
-
-Curso: **Orquestração de Containers com Kubernetes — ESR/RNP**  
-Sessão: **09 - Monitoramento e Observabilidade**  
+# Tarefa 9 - Curso Kubernetes (ESR/RNP)
 
 ---
 
@@ -140,7 +137,7 @@ Implementar soluções de monitoramento e observabilidade em um cluster Kubernet
 
 - `custom-values.yaml` — Arquivo usado para corrigir os data sources do Grafana (com IP direto do Prometheus)    
 - `loki-grafana-nodeport.yaml` — Serviço `NodePort` para expor o Grafana na porta 30081    
-- `Pasta JSON_dashboards` — Pasta contendo os arquivos de dashboard utilizados nesta tarefa (baixados manualmente)    
+- `JSON_dashboards` — Pasta contendo os arquivos de dashboard utilizados nesta tarefa (baixados manualmente)    
 - `README.md` — Este documento
     
 
