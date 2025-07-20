@@ -1,0 +1,24 @@
+grafana:
+  enabled: true
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://10.104.122.173 # url: http://loki-prometheus-server.grafana.svc
+          isDefault: true
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.grafana.svc
+
+prometheus:
+  enabled: true
+  alertmanager:
+    persistentVolume:
+      enabled: false
+  server:
+    persistentVolume:
+      enabled: false
