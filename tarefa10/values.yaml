@@ -1,0 +1,237 @@
+## @section Global parameters
+##
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: ""
+  security:
+    allowInsecureImages: true
+
+## @section Common parameters
+##
+kubeVersion: ""
+nameOverride: ""
+fullnameOverride: ""
+clusterDomain: cluster.local
+extraDeploy: []
+
+## @section WordPress Parameters
+
+wordpressUsername: user
+wordpressPassword: ""
+wordpressEmail: user@example.com
+wordpressFirstName: FirstName
+wordpressLastName: LastName
+
+## ✅ Parâmetro modificado:
+wordpressBlogName: "Meu Blog Kubernetes ESR"
+
+wordpressBlogDescription: "Bitnami WordPress running on Kubernetes"
+wordpressTablePrefix: wp_
+
+allowEmptyPassword: true
+existingSecret: ""
+existingSecretPasswordKey: wordpress-password
+existingSecretEmailKey: wordpress-email
+existingSecretFirstNameKey: wordpress-first-name
+existingSecretLastNameKey: wordpress-last-name
+existingSecretBlogNameKey: wordpress-blog-name
+existingSecretBlogDescriptionKey: wordpress-blog-description
+
+wordpressSkipInstall: false
+wordpressScheme: http
+wordpressPlugins: []
+wordpressEnableHttps: false
+wordpressCertsSecretName: ""
+wordpressEnableXmlrpc: false
+
+wordpressConfigureCache: true
+wordpressConfigureApache: true
+
+wordpressEnableMultisite: false
+wordpressMultisiteScheme: http
+wordpressMultisiteDomain: ""
+wordpressMultisiteNetworkType: subdomain
+wordpressMultisiteEnableHttps: false
+
+apacheAllowOverride: All
+htaccessPersistenceEnabled: false
+htaccessConfigMap: ""
+customHTAccessConfiguration: ""
+customPostInitScripts: ""
+smtpHost: ""
+smtpPort: ""
+smtpUser: ""
+smtpPassword: ""
+smtpProtocol: ""
+
+containerPorts:
+  http: 8080
+  https: 8443
+
+command: []
+args: []
+hostAliases: []
+updateStrategy:
+  type: RollingUpdate
+
+extraEnvVars: []
+extraEnvVarsCM: ""
+extraEnvVarsSecret: ""
+extraVolumes: []
+extraVolumeMounts: []
+
+initContainers: []
+sidecars: []
+
+persistence:
+  enabled: false #antes era true
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+  annotations: {}
+  existingClaim: wordpress
+
+resources:
+  limits: {}
+  requests: {}
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 300
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+customLivenessProbe: {}
+customReadinessProbe: {}
+
+podLabels: {}
+podAnnotations: {}
+affinity: {}
+nodeSelector: {}
+tolerations: []
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPU: 50
+  targetMemory: 50
+
+service:
+  type: NodePort
+  port: 80
+  httpsPort: 443
+  nodePorts:
+    http: ""
+    https: ""
+  externalTrafficPolicy: Cluster
+  loadBalancerIP: ""
+  annotations: {}
+
+ingress:
+  enabled: false
+  certManager: false
+  hostname: wordpress.local
+  path: /
+  annotations: {}
+  tls: false
+  extraHosts: []
+  extraPaths: []
+  extraTls: []
+  secrets: []
+  ingressClassName: ""
+
+metrics:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/apache-exporter
+    tag: 0.13.3-debian-11-r0
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9117"
+  resources: {}
+  containerPorts:
+    metrics: 9117
+
+volumePermissions:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/bitnami-shell
+    tag: 11-debian-11-r92
+    pullPolicy: Always
+    pullSecrets: []
+  resources: {}
+
+## @section MariaDB chart configuration
+##
+mariadb:
+  enabled: true
+  architecture: standalone
+  auth:
+    rootPassword: ""
+    username: bn_wordpress
+    password: ""
+    database: bitnami_wordpress
+  primary:
+    persistence:
+      enabled: false #Antes era true e mudamos para false. <-- Isso desativa o volume persistente.
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+      existingClaim: data-meu-wordpress-mariadb-0
+    resources:
+      limits: {}
+      requests: {}
+    podSecurityContext:
+      enabled: true
+      fsGroup: 1001
+    containerSecurityContext:
+      enabled: true
+      runAsUser: 1001
+
+externalDatabase:
+  host: ""
+  port: 3306
+  user: bn_wordpress
+  password: ""
+  database: bitnami_wordpress
+  existingSecret: ""
+  existingSecretPasswordKey: ""
+
+networkPolicy:
+  enabled: false
+  allowExternal: true
+  extraIngress: []
+  extraEgress: []
+
+rbac:
+  create: false
+
+serviceAccount:
+  create: false
+  name: ""
